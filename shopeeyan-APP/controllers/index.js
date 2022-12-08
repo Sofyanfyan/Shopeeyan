@@ -1,14 +1,17 @@
 const { Customer, Product, Seller, Shop, Category} = require('../models')
 var bcrypt = require('bcryptjs');
 const { money } = require('../helpers')
+
 class Controller {
    static home(req, res) {
-      
-      Product.findAll({
+      const { name } = req.query
+      let options = {
          order: [['createdAt', 'DESC']]
-      })
-      .then(data => res.render('home', {data, money}))
-      .catch(err=> res.send(err))
+      }
+
+      Product.home(options, name)
+         .then(data => res.render('home', {data, money}))
+         .catch(err=> res.send(err))
    }
 
    static register(req, res) {
@@ -17,7 +20,6 @@ class Controller {
    }
 
    static detailProducts(req, res){
-
       Product.findOne({
          where:{
             id: req.params.id
@@ -32,18 +34,11 @@ class Controller {
       .catch(err=> res(err))
    }
 
-
    static registerPost(req, res) {
-        // res.send(req.body)
       const { name, email, password, sellerAcc } = req.body
-      
-      let owner 
-
          if (sellerAcc === 'yes') {
-            // res.send(req.body)
             Seller.create({ name, email, password })
                   .then(_ => {
-
                      return Seller.findOne({
                         where:{
                            email
@@ -51,7 +46,6 @@ class Controller {
                      })
                   })
                   .then(data => {
-
                      res.render('form-create-shop', {data})
                   })
                   .catch(err => {
@@ -79,13 +73,9 @@ class Controller {
 
 
    static createShopPost(req, res){
-
-      let seller 
-
       const { SellerId, name } = req.body
       Shop.create({SellerId, name})
       .then(() => {
-
          return Seller.findOne({
             where:{
                id: SellerId
@@ -100,7 +90,6 @@ class Controller {
    }
 
    static loginPage(req, res){
-
       res.render('login-page')
    }
 
@@ -110,7 +99,6 @@ class Controller {
    }
 
    static logInCustPost(req, res) {
-      // res.send(req.body)
       const { email, password } = req.body
       Customer.findOne({ where: { email } })
             .then(cust => {
@@ -159,7 +147,6 @@ class Controller {
    }
 
    static shopById (req, res){
-
       Shop.findOne({
          include: {
             model: Product
@@ -169,7 +156,6 @@ class Controller {
          }
       })
       .then(data => {
-         // res.send(data)
          res.render('list-shop', { data, money })
    })
       .catch(err => res.send(err))

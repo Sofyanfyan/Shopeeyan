@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const { Op } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -16,6 +19,22 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsToMany(models.Customer, {
          through: models.Cart
       })
+    }
+
+    formattedDate() {
+      return this.updatedAt.toISOString().slice(0, 10)
+    }
+
+    static home(options, name) {
+      if (name) {
+        options.where = {
+           name : { [Op.iLike]: `%${name}%` }
+        }
+     }
+
+      return Product.findAll(options)
+        .then(products => products)
+        .catch(err => err)
     }
   }
   Product.init({
