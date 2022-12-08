@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
          through: models.Cart
       })
     }
+
+    formattedDate() {
+      return this.updatedAt.toISOString().slice(0, 10)
+    }
   }
   Product.init({
     name: DataTypes.STRING,
