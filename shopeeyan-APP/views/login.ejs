@@ -9,7 +9,11 @@
 <body>
     <h1>Log in to shopeeyan</h1>
     <hr>
-    
+
+   <% if (err) { %>
+      <p style="color: red;"><%= err %></p> 
+   <% } %>
+
     <form action="/login" method="post">
         <p>
             Email <br>

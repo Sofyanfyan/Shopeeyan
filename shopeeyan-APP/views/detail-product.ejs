@@ -10,8 +10,15 @@
    <%- include('./partials/navbar') %> <br><br>
    <h1>Detail <%= data.name %></h1><hr>
    <img src="<%= data.img %>" width="200" height="200">
-   <h6><%= data.name %></h6>
-   <h6><%= data.description %></h6>
-   <h6><%= money(data.price) %></h6>
+   <h6>Product :</h6>
+   <p><%= data.name %></p>
+   <h6>Description :</h6>
+   <p><%= data.description %></p>
+   <h6>Shop :</h6>
+   <p><a href="/shop/<%= data.Shop.id %>"><%= data.Shop.name %></a></p>
+   <h6>Category :</h6>
+   <p><%= data.Category.name %></p>
+   <h6>Price :</h6>
+   <p><%= money(data.price) %></p>
 </body>
 </html>
