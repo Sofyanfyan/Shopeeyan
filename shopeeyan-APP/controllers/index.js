@@ -107,11 +107,11 @@ class Controller {
                   if (checkPassword) return res.redirect(`/owner/${data.Shop.id}`)
                   else {
                         const errors = 'Invalid password'
-                        return res.redirect(`/login?err=${errors}`)
+                        return res.redirect(`/login/customer?err=${errors}`)
                   }
                }else {
                   const errors = 'Invalid email or password'
-                  return res.redirect(`/login?err=${errors}`)
+                  return res.redirect(`/login/customer?err=${errors}`)
                }
             })
             .catch(err => res.send(err))
@@ -128,11 +128,14 @@ class Controller {
             .then(seller => {
                if (seller) {
                   const checkPassword = bcrypt.compareSync(password, seller.password);
-                  if (checkPassword) return Shop.findOne({
-                     where:{
-                        SellerId: seller.id
-                     }
-                  })
+                  if (checkPassword) {
+                     return Shop.findOne({
+                        where:{
+                           SellerId: seller.id
+                        }
+                     })
+                     .then(data => res.redirect(`/owner/${data.id}`))
+                  } 
                   else {
                         const errors = 'Invalid password'
                         res.redirect(`/login/seller?err=${errors}`)
@@ -142,7 +145,6 @@ class Controller {
                   res.redirect(`/login/seller?err=${errors}`)
                }
             })
-            .then(data => res.redirect(`/owner/${data.id}`))
             .catch(err => res.send(err))
    }
 
