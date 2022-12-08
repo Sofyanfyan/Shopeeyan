@@ -32,14 +32,28 @@ class Controller {
       .catch(err=> res(err))
    }
 
+
    static registerPost(req, res) {
         // res.send(req.body)
       const { name, email, password, sellerAcc } = req.body
+      
+      let owner 
 
          if (sellerAcc === 'yes') {
             // res.send(req.body)
             Seller.create({ name, email, password })
-                  .then(_ => res.redirect('/loginSeller'))
+                  .then(_ => {
+
+                     return Seller.findOne({
+                        where:{
+                           email
+                        }
+                     })
+                  })
+                  .then(data => {
+
+                     res.render('form-create-shop', {data})
+                  })
                   .catch(err => {
                      if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
                         const errors = err.errors.map(el => el.message)
@@ -62,12 +76,36 @@ class Controller {
          }
    }
 
-   static logIn(req, res) {
+   static createShopPost(req, res){
+
+      const { SellerId, name } = req.body
+      Shop.create({SellerId, name})
+      .then(() => {
+
+         return Seller.findOne({
+            where:{
+               id: SellerId
+            },
+            include:{
+               model: Shop
+            }
+         })
+      })
+      .then((data) => res.send(data))
+      .catch(err => res.send(err))
+   }
+
+   static loginPage(req, res){
+
+      res.render('login-page')
+   }
+
+   static logInCust(req, res) {
       const { err } = req.query
       res.render('login', { err })
    }
 
-   static logInPost(req, res) {
+   static logInCustPost(req, res) {
       // res.send(req.body)
       const { email, password } = req.body
       Customer.findOne({ where: { email } })
