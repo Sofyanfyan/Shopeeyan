@@ -1,4 +1,4 @@
-const { Customer } = require('../models')
+const { Customer, Seller } = require('../models')
 var bcrypt = require('bcryptjs');
 class Controller {
     static home(req, res) {
@@ -6,19 +6,43 @@ class Controller {
     }
 
     static register(req, res) {
-        res.render('registerForm')
+        const { err } = req.query
+        res.render('registerForm', { err })
     }
 
     static registerPost(req, res) {
         // res.send(req.body)
-        const { name, email, password } = req.body
-        Customer.create({ name, email, password })
-            .then(_ => res.redirect('/login'))
-            .catch(err => res.send(err))
+        const { name, email, password, sellerAcc } = req.body
+
+        if (sellerAcc === 'yes') {
+            // res.send(req.body)
+            Seller.create({ name, email, password })
+                .then(_ => res.redirect('/loginSeller'))
+                .catch(err => {
+                    if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
+                        const errors = err.errors.map(el => el.message)
+                        res.redirect(`/register?err=${errors}`)
+                    }else {
+                        res.send(err)
+                    }
+                })
+        }else {
+            Customer.create({ name, email, password })
+                .then(_ => res.redirect('/login'))
+                .catch(err => {
+                    if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
+                        const errors = err.errors.map(el => el.message)
+                        res.redirect(`/register?err=${errors}`)
+                    }else {
+                        res.send(err)
+                    }
+                })
+        }
     }
 
     static logIn(req, res) {
-        res.render('login')
+        const { err } = req.query
+        res.render('login', { err })
     }
 
     static logInPost(req, res) {
@@ -28,15 +52,38 @@ class Controller {
             .then(cust => {
                 if (cust) {
                     const checkPassword = bcrypt.compareSync(password, cust.password);
-
                     if (checkPassword) return res.redirect('/')
                     else {
-                        const error = 'Invalid password'
-                        return res.redirect(`/login?errors=${error}`)
+                        const errors = 'Invalid password'
+                        return res.redirect(`/login?err=${errors}`)
                     }
                 }else {
-                    const error = 'Invalid email or password'
-                    return res.redirect(`/login?errors=${error}`)
+                    const errors = 'Invalid email or password'
+                    return res.redirect(`/login?err=${errors}`)
+                }
+            })
+            .catch(err => res.send(err))
+    }
+
+    static logInSeller(req, res) {
+        const { err } = req.query
+        res.render('loginSeller', { err })
+    }
+
+    static loginSellerPost(req, res) {
+        const { email, password } = req.body
+        Seller.findOne({ where: { email } })
+            .then(seller => {
+                if (seller) {
+                    const checkPassword = bcrypt.compareSync(password, seller.password);
+                    if (checkPassword) return res.redirect('/')
+                    else {
+                        const errors = 'Invalid password'
+                        return res.redirect(`/login?err=${errors}`)
+                    }
+                }else {
+                    const errors = 'Invalid email or password'
+                    return res.redirect(`/login?err=${errors}`)
                 }
             })
             .catch(err => res.send(err))

@@ -8,4 +8,7 @@ router.post('/register', Controller.registerPost)
 router.get('/login', Controller.logIn)
 router.post('/login', Controller.logInPost)
 
+router.get('/loginSeller', Controller.logInSeller)
+router.post('/loginSeller', Controller.loginSellerPost)
+
 module.exports = router

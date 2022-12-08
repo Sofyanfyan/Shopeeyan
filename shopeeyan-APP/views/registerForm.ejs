@@ -9,6 +9,11 @@
 <body>
     <h1>Create Account</h1>
     <hr>
+
+    <% if (err) { %>
+       <p style="color: red;"><%= err %></p> 
+    <% } %>
+
     <form action="/register" method="post">
         <p>
             Name <br>
@@ -23,6 +28,15 @@
         <p>
             Password <br>
             <input type="text" name="password">
+        </p>
+
+        <p>
+            Make seller account? <br>
+            <input type="radio" name="sellerAcc" value="yes">
+            <label for="sellerAcc">Yes</label>
+
+            <input type="radio" name="sellerAcc" value="">
+            <label for="sellerAcc">No</label>
         </p>
 
         <input type="submit" value="Sign Up">

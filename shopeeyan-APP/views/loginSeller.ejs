@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Log in to shopeeyan</h1>
+    <h1>Log in to shopeeyan and sell some stuff</h1>
     <hr>
 
     <% if(err) { %>
         <p style="color: red;"><%= err %></p>
     <% } %>
     
-    <form action="/login" method="post">
+    <form action="/loginSeller" method="post">
         <p>
             Email <br>
             <input type="text" name="email">
