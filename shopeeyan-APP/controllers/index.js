@@ -1,12 +1,22 @@
 const { Customer, Product, Seller, Shop, Category} = require('../models')
 var bcrypt = require('bcryptjs');
 const { money } = require('../helpers')
+const { Op } = require("sequelize");
+
 class Controller {
    static home(req, res) {
-      
-      Product.findAll({
+      const { name } = req.query
+      let options = {
          order: [['createdAt', 'DESC']]
-      })
+      }
+
+      if (name) {
+         options.where = {
+            name : { [Op.iLike]: `%${name}%` }
+         }
+      }
+
+      Product.findAll(options)
       .then(data => res.render('home', {data, money}))
       .catch(err=> res.send(err))
    }
