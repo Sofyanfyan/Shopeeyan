@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <style>
+      .center {
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+   }
+   </style>
+   <title>Shoopeyan</title>
+</head>
+<body>
+
+   <%- include('./partials/navbar') %> <br><br>
+
+   <table border="1" class="table table-striped table-hover center">
+      <thead>
+         <tr>
+            <td><b>Image</b></td>
+            <td><b>Name</b></td>
+            <td><b>Price</b></td>
+            <td><b>Action</b></td>
+         </tr>
+      </thead>
+
+      <tbody>
+         <% data.forEach(el => { %>
+            <tr>
+               <td><img src="<%= el.img %>" width="100" height="100"></td>
+               <td><%= el.name %></td>
+               <td><%= money(el.price) %></td>
+               <td><a href="/priducts/detail/<%= el.id %>" class="btn btn-primary">Read Detail</a> || <a href="/priducts/buy/<% el.id %>" class="btn btn-success">Buy</a></td>
+            </tr>
+         <% }) %>
+      </tbody>
+   </table>
+   <table></table>
+</body>
+</html>
