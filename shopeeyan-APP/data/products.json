@@ -1,0 +1,141 @@
+[{
+   "name": "Stainless Steel Cleaner Vision",
+   "img": "http://dummyimage.com/209x100.png/dddddd/000000",
+   "description": "Sltr-haris Type III physeal fx upper end of l tibia, sequela",
+   "ShopId": 1,
+   "price": 9489700,
+   "CategoryId": 1
+ }, {
+   "name": "Pepper - Red Bell",
+   "img": "http://dummyimage.com/116x100.png/dddddd/000000",
+   "description": "Pilonidal cyst and sinus with abscess",
+   "ShopId": 1,
+   "price": 1337002,
+   "CategoryId": 2
+ }, {
+   "name": "Bread Bowl Plain",
+   "img": "http://dummyimage.com/240x100.png/5fa2dd/ffffff",
+   "description": "Corrosion of unsp degree of trunk, unspecified site, sequela",
+   "ShopId": 1,
+   "price": 7134516,
+   "CategoryId": 1
+ }, {
+   "name": "Sugar - Invert",
+   "img": "http://dummyimage.com/178x100.png/ff4444/ffffff",
+   "description": "Dissem chorioretin inflammation, generalized, bilateral",
+   "ShopId": 2,
+   "price": 1955676,
+   "CategoryId": 2
+ }, {
+   "name": "Wine - Magnotta - Cab Sauv",
+   "img": "http://dummyimage.com/235x100.png/dddddd/000000",
+   "description": "Malig neoplm of prph nerves of left upper limb, inc shoulder",
+   "ShopId": 3,
+   "price": 8063629,
+   "CategoryId": 1
+ }, {
+   "name": "Table Cloth 90x90 Colour",
+   "img": "http://dummyimage.com/226x100.png/dddddd/000000",
+   "description": "Alcoholic cardiomyopathy",
+   "ShopId": 2,
+   "price": 8291859,
+   "CategoryId": 3
+ }, {
+   "name": "Dikon",
+   "img": "http://dummyimage.com/156x100.png/5fa2dd/ffffff",
+   "description": "External constriction of ear",
+   "ShopId": 2,
+   "price": 7115394,
+   "CategoryId": 1
+ }, {
+   "name": "Mushroom - Portebello",
+   "img": "http://dummyimage.com/158x100.png/5fa2dd/ffffff",
+   "description": "Inj unsp musc/fasc/tend at wrist and hand level, left hand",
+   "ShopId": 2,
+   "price": 9891933,
+   "CategoryId": 3
+ }, {
+   "name": "Pepper - Red Bell",
+   "img": "http://dummyimage.com/191x100.png/ff4444/ffffff",
+   "description": "Terrorism w chemical weapons, terrorist injured, init",
+   "ShopId": 2,
+   "price": 6724810,
+   "CategoryId": 3
+ }, {
+   "name": "Wine - Pinot Noir Mondavi Coastal",
+   "img": "http://dummyimage.com/206x100.png/5fa2dd/ffffff",
+   "description": "Superficial foreign body of right thumb",
+   "ShopId": 2,
+   "price": 7383204,
+   "CategoryId": 1
+ }, {
+   "name": "Beans - Kidney, Red Dry",
+   "img": "http://dummyimage.com/150x100.png/dddddd/000000",
+   "description": "Underdosing of other topical agents, sequela",
+   "ShopId": 1,
+   "price": 324982,
+   "CategoryId": 3
+ }, {
+   "name": "Mustard Prepared",
+   "img": "http://dummyimage.com/156x100.png/ff4444/ffffff",
+   "description": "Exfoliatn due to erythemat cond w 60-69 pct of body surface",
+   "ShopId": 2,
+   "price": 4174012,
+   "CategoryId": 1
+ }, {
+   "name": "Wine - Jaboulet Cotes Du Rhone",
+   "img": "http://dummyimage.com/196x100.png/cc0000/ffffff",
+   "description": "Cervical shortening, third trimester",
+   "ShopId": 2,
+   "price": 7558197,
+   "CategoryId": 1
+ }, {
+   "name": "Sausage - Meat",
+   "img": "http://dummyimage.com/175x100.png/5fa2dd/ffffff",
+   "description": "Exanthema subitum [sixth disease], unspecified",
+   "ShopId": 3,
+   "price": 9816967,
+   "CategoryId": 2
+ }, {
+   "name": "Crab - Dungeness, Whole, live",
+   "img": "http://dummyimage.com/216x100.png/dddddd/000000",
+   "description": "Nondisp fx of greater tuberosity of r humer, init for opn fx",
+   "ShopId": 1,
+   "price": 8704823,
+   "CategoryId": 3
+ }, {
+   "name": "Veal - Bones",
+   "img": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+   "description": "Unspecified physeal fracture of phalanx of left toe, init",
+   "ShopId": 2,
+   "price": 6109990,
+   "CategoryId": 2
+ }, {
+   "name": "Milk Powder",
+   "img": "http://dummyimage.com/153x100.png/5fa2dd/ffffff",
+   "description": "Nutritional marasmus",
+   "ShopId": 2,
+   "price": 8594941,
+   "CategoryId": 1
+ }, {
+   "name": "Wine - Puligny Montrachet A.",
+   "img": "http://dummyimage.com/101x100.png/5fa2dd/ffffff",
+   "description": "Expsr to rdct in atmos pressr wh surfc fr underground, init",
+   "ShopId": 1,
+   "price": 5010446,
+   "CategoryId": 2
+ }, {
+   "name": "Yeast Dry - Fermipan",
+   "img": "http://dummyimage.com/199x100.png/dddddd/000000",
+   "description": "Burn of first degree of unspecified shoulder, subs encntr",
+   "ShopId": 1,
+   "price": 2936714,
+   "CategoryId": 2
+ }, {
+   "name": "Rice Paper",
+   "img": "http://dummyimage.com/216x100.png/cc0000/ffffff",
+   "description": "External constriction of right back wall of thorax",
+   "ShopId": 1,
+   "price": 9888835,
+   "CategoryId": 2
+ }]
