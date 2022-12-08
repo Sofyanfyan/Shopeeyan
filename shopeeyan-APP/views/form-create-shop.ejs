@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Create Shop</title>
+</head>
+<body>
+   <h1>Create shop for <%= data.name %></h1>
+
+   <form action="/create/shop" method="post">
+
+      <p>
+         Owner Name : <br>
+         <select name="SellerId">
+            <option value="<%= data.id%>"><%= data.name %> </option>
+         </select>
+      </p>
+
+      <p>
+         Name Shop : <br>
+         <input type="text" name="name">
+      </p>
+      
+      <input type="submit" value="Create">
+   </form>
+</body>
+</html>

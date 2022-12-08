@@ -7,10 +7,15 @@ router.get('/priducts/detail/:id', Controller.detailProducts)
 
 router.get('/register', Controller.register)
 router.post('/register', Controller.registerPost)
-router.get('/login', Controller.logIn)
-router.post('/login', Controller.logInPost)
-router.get('/loginSeller', Controller.logInSeller)
-router.post('/loginSeller', Controller.loginSellerPost)
+router.post('/create/shop', Controller.createShopPost)
+
+router.get('/login', Controller.loginPage)
+
+router.get('/login/customer', Controller.logInCust)
+router.post('/login/customer', Controller.logInCustPost)
+
+router.get('/login/seller', Controller.logInSeller)
+router.post('/login/seller', Controller.loginSellerPost)
 
 router.get('/shop/:shopId',Controller.shopById)
 
