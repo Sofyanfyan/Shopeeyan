@@ -1,7 +1,6 @@
 const { Customer, Product, Seller, Shop, Category} = require('../models')
 var bcrypt = require('bcryptjs');
 const { money } = require('../helpers')
-const { Op } = require("sequelize");
 
 class Controller {
    static home(req, res) {
@@ -10,15 +9,9 @@ class Controller {
          order: [['createdAt', 'DESC']]
       }
 
-      if (name) {
-         options.where = {
-            name : { [Op.iLike]: `%${name}%` }
-         }
-      }
-
-      Product.findAll(options)
-      .then(data => res.render('home', {data, money}))
-      .catch(err=> res.send(err))
+      Product.home(options, name)
+         .then(data => res.render('home', {data, money}))
+         .catch(err=> res.send(err))
    }
 
    static register(req, res) {
