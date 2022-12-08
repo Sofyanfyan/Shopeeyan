@@ -70,6 +70,8 @@ class Controller {
          }
    }
 
+
+
    static createShopPost(req, res){
       const { SellerId, name } = req.body
       Shop.create({SellerId, name})
@@ -83,7 +85,7 @@ class Controller {
             }
          })
       })
-      .then((data) => res.send(data))
+      .then((data) => res.redirect(`/owner/${data.Shop.id}`))
       .catch(err => res.send(err))
    }
 
@@ -102,7 +104,7 @@ class Controller {
             .then(cust => {
                if (cust) {
                   const checkPassword = bcrypt.compareSync(password, cust.password);
-                  if (checkPassword) return res.redirect('/')
+                  if (checkPassword) return res.redirect(`/owner/${data.Shop.id}`)
                   else {
                         const errors = 'Invalid password'
                         return res.redirect(`/login?err=${errors}`)
@@ -126,16 +128,21 @@ class Controller {
             .then(seller => {
                if (seller) {
                   const checkPassword = bcrypt.compareSync(password, seller.password);
-                  if (checkPassword) return res.redirect('/')
+                  if (checkPassword) return Shop.findOne({
+                     where:{
+                        SellerId: seller.id
+                     }
+                  })
                   else {
                         const errors = 'Invalid password'
-                        return res.redirect(`/login?err=${errors}`)
+                        res.redirect(`/login/seller?err=${errors}`)
                   }
                }else {
                   const errors = 'Invalid email or password'
-                  return res.redirect(`/login?err=${errors}`)
+                  res.redirect(`/login/seller?err=${errors}`)
                }
             })
+            .then(data => res.redirect(`/owner/${data.id}`))
             .catch(err => res.send(err))
    }
 
@@ -151,6 +158,126 @@ class Controller {
       .then(data => {
          res.render('list-shop', { data, money })
    })
+      .catch(err => res.send(err))
+   }
+
+   static ownerPage(req, res){
+
+      Shop.findOne({
+         include:{
+            all: true
+         },
+         where:{
+            id: req.params.id
+         }
+      })
+      .then(data => {
+         res.render('list-product-owner', {data, money})
+         // res.send(data)
+      })
+      .catch(err => res.send(err))
+   }
+
+   static productForm(req, res){
+
+      let category
+
+      Category.findAll()
+      .then(data => {
+         category = data
+
+         return Shop.findOne({
+            where:{
+               id: req.params.ownerId
+            }
+         })
+      })
+      .then(data => res.render('add-product', {data, category}))
+      .catch(err => res.send(err))
+   }
+
+
+   static addProduct(req, res){
+
+      const { ShopId, name, img, description, price, CategoryId} = req.body
+
+      Product.create({ ShopId, name, img, description, price, CategoryId })
+      .then(()=> res.redirect(`/owner/${ShopId}`))
+      .catch(err => res.send(err))
+   }
+
+
+   static destroy(req, res){
+
+   let shop_id
+
+      Product.findOne({
+         where:{
+            id: req.params.id
+         }
+      })
+      .then((data)=>{
+         
+         shop_id = data.ShopId
+
+         Product.destroy({
+            where:{
+               id: req.params.id
+            }
+         })
+      })
+      .then(()=>{
+
+         res.redirect(`/owner/${shop_id}`)
+      })
+      .catch(err => res.send(err))
+   }
+
+
+   static updateForm(req, res){
+
+      let category
+
+      Category.findAll()
+      .then(data => {
+
+         category = data
+
+         return Product.findOne({
+            where:{
+               id: req.params.id
+            }
+         })
+      })
+      .then(data => res.render('update-product', {data, category}))
+      .catch(err => res.send(err))
+   }
+
+   static update(req, res){
+
+      const {name, img, description, price, CategoryId} = req.body
+
+   let shop_id
+
+      Product.findOne({
+         where:{
+            id: req.params.id
+         }
+      })
+      .then((data)=>{
+         
+         shop_id = data.ShopId
+
+         Product.update({name, img, description, price, CategoryId},{
+            where:{
+               id: req.params.id
+            }
+         })
+      })
+      .then(()=>{
+
+         res.redirect(`/owner/${shop_id}`)
+      })
       .catch(err => res.send(err))
    }
 }
