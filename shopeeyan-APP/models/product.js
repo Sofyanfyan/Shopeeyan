@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Shop)
       Product.belongsTo(models.Category)
       Product.belongsToMany(models.Customer, {
-         
          through: models.Cart
       })
     }
