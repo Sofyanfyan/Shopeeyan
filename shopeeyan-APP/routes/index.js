@@ -19,4 +19,14 @@ router.post('/login/seller', Controller.loginSellerPost)
 
 router.get('/shop/:shopId',Controller.shopById)
 
+router.get('/owner/:id', Controller.ownerPage)
+router.get('/owner/add/:ownerId', Controller.productForm)
+router.post('/owner/add/:ownerId', Controller.addProduct)
+
+router.get('/products/delete/:id', Controller.destroy)
+
+router.get('/products/update/:id', Controller.updateForm)
+router.post('/products/update/:id', Controller.update)
+
+
 module.exports = router
