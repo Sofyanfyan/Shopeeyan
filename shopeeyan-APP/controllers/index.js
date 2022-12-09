@@ -31,7 +31,7 @@ class Controller {
       .then(data =>{ 
          res.render('detail-product', {data, money})
       })
-      .catch(err=> res(err))
+      .catch(err=> res.send(err))
    }
 
    static registerPost(req, res) {
@@ -90,7 +90,8 @@ class Controller {
    }
 
    static loginPage(req, res){
-      res.render('login-page')
+      const { err } = req.query
+      res.render('login-page', { err })
    }
 
    static logInCust(req, res) {
@@ -104,7 +105,10 @@ class Controller {
             .then(cust => {
                if (cust) {
                   const checkPassword = bcrypt.compareSync(password, cust.password);
-                  if (checkPassword) return res.redirect(`/owner/${data.Shop.id}`)
+                  if (checkPassword) {
+                     req.session.userId = user.id
+                     return res.redirect(`/owner/${data.Shop.id}`)
+                  }
                   else {
                         const errors = 'Invalid password'
                         return res.redirect(`/login/customer?err=${errors}`)

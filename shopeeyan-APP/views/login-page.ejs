@@ -16,8 +16,12 @@
    <title>Login</title>
 </head>
 <body>
-   <h1>Pilih salah satu !</h1><br><hr>
+   <% if (err) { %>
+      <h1><%= err %></h1><br><hr>
+   <% }else { %>
+      <h1>Pilih salah satu untuk log in!</h1><br><hr>
+   <% } %>
 
-   <p><a href="/login/customer" class="btn btn-primary">Customer</a> || <a href="/login/seller" class="btn btn-primary">Seller</a></p>
+   <p><a href="/login/customer" class="btn btn-primary">Customer log in</a> || <a href="/login/seller" class="btn btn-primary">Seller log in</a></p>
 </body>
 </html>
