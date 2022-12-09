@@ -50,6 +50,7 @@ router.use((req, res, next) => {
 router.get('/products/detail/:id', Controller.detailProducts)
 router.get('/products/buy/:id', Controller.buy)
 router.get('/cart', Controller.cart)
+router.get('/cart/delete', Controller.checkOut)
 router.get('/logout', Controller.logout)
 
 module.exports = router

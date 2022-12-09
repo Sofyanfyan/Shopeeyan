@@ -309,6 +309,8 @@ class Controller {
 
 
    static cart(req, res){
+   
+   let total = 0
 
       Customer.findOne({
          where:{
@@ -318,8 +320,21 @@ class Controller {
             model: Product
          }
       })
-      .then(data => res.send(data))
+
+      .then(data => res.render('cart', {data , money, total}))
       .catch(err => res.send(err))
+   }
+
+
+   static checkOut(req, res){
+
+      Cart.destroy({
+         where:{
+            CustomerId: req.session.userId
+         }
+      })
+      .then(() => res.redirect('/'))
+      .catch(err =>res.send(err))
    }
 }
 
