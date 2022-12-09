@@ -3,11 +3,11 @@ const Controller = require('../controllers')
 const router = express.Router()
 
 router.get('/', Controller.home)
-router.get('/priducts/detail/:id', Controller.detailProducts)
 
-router.get('/register', Controller.register)
-router.post('/register', Controller.registerPost)
-router.post('/create/shop', Controller.createShopPost)
+// router.get('/priducts/detail/:id', Controller.detailProducts)
+// router.get('/register', Controller.register)
+// router.post('/register', Controller.registerPost)
+// router.post('/create/shop', Controller.createShopPost)
 
 router.get('/login', Controller.loginPage)
 
@@ -16,6 +16,26 @@ router.post('/login/customer', Controller.logInCustPost)
 
 router.get('/login/seller', Controller.logInSeller)
 router.post('/login/seller', Controller.loginSellerPost)
+
+// 
+router.get('/register', Controller.register)
+router.post('/register', Controller.registerPost)
+// 
+
+router.use((req, res, next) => {
+    // console.log(req.session)
+    if(!req.session.userId){
+      const errors = `Please login first!`
+      res.redirect(`/login?err=${errors}`)
+    } else {
+      next()
+    }
+})
+
+//
+router.get('/priducts/detail/:id', Controller.detailProducts)
+router.post('/create/shop', Controller.createShopPost)
+//
 
 router.get('/shop/:shopId',Controller.shopById)
 
@@ -28,5 +48,6 @@ router.get('/products/delete/:id', Controller.destroy)
 router.get('/products/update/:id', Controller.updateForm)
 router.post('/products/update/:id', Controller.update)
 
+router.get('/logout', Controller.logout)
 
 module.exports = router
