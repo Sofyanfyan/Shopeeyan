@@ -1,4 +1,4 @@
-const { Customer, Product, Seller, Shop, Category} = require('../models')
+const { Customer, Product, Seller, Shop, Category, Cart} = require('../models')
 var bcrypt = require('bcryptjs');
 const { money } = require('../helpers')
 
@@ -299,11 +299,26 @@ class Controller {
 
    static buy(req, res){
 
-      Category.create({CustomerId: req.session.userId, ProductId: req.params.id})
+      Cart.create({CustomerId: req.session.userId, ProductId: +req.params.id})
       .then(()=> {
-
-         res.redirect('/')
+         // console.log(req.session.userId, req.params.id);
+         res.redirect('/cart')
       })
+      .catch(err => res.send(err))
+   }
+
+
+   static cart(req, res){
+
+      Customer.findOne({
+         where:{
+            id: req.session.userId
+         },
+         include:{
+            model: Product
+         }
+      })
+      .then(data => res.send(data))
       .catch(err => res.send(err))
    }
 }
