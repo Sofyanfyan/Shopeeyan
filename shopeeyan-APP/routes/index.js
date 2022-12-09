@@ -22,18 +22,6 @@ router.get('/register', Controller.register)
 router.post('/register', Controller.registerPost)
 // 
 
-router.use((req, res, next) => {
-    // console.log(req.session)
-    if(!req.session.userId){
-      const errors = `Please login first!`
-      res.redirect(`/login?err=${errors}`)
-    } else {
-      next()
-    }
-})
-
-//
-router.get('/priducts/detail/:id', Controller.detailProducts)
 router.post('/create/shop', Controller.createShopPost)
 //
 
@@ -48,6 +36,20 @@ router.get('/products/delete/:id', Controller.destroy)
 router.get('/products/update/:id', Controller.updateForm)
 router.post('/products/update/:id', Controller.update)
 
+router.use((req, res, next) => {
+    // console.log(req.session)
+    if(!req.session.userId){
+      const errors = `Please login first!`
+      res.redirect(`/login?err=${errors}`)
+    } else {
+      next()
+    }
+})
+
+//
+router.get('/products/detail/:id', Controller.detailProducts)
+router.get('/products/buy/:id', Controller.buy)
+router.get('/')
 router.get('/logout', Controller.logout)
 
 module.exports = router

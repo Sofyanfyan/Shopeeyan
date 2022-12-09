@@ -296,6 +296,16 @@ class Controller {
          }
       })
    }
+
+   static buy(req, res){
+
+      Category.create({CustomerId: req.session.userId, ProductId: req.params.id})
+      .then(()=> {
+
+         res.redirect('/')
+      })
+      .catch(err => res.send(err))
+   }
 }
 
 module.exports = Controller
